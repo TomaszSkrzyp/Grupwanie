@@ -127,11 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Projekt\Clust.cpp" />
-    <ClCompile Include="..\..\Projekt\data_create.cpp" />
+    <ClInclude Include="..\create.h" />
+    <ClInclude Include="create.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="create.h" />
+    <ClCompile Include="x64\Debug\Clust.cpp" />
+    <ClCompile Include="x64\Debug\data_create.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
