@@ -32,25 +32,17 @@ void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int 
     std::vector<Point> Centroidy;///wektor przechowujacy centroidy clustrow
     std::vector<Point>::iterator it;
     std::vector<Point>::iterator p_it;
-
-
-
     for (int i = 0; i < ilosc_k; ++i) {
-
         Centroidy.push_back(Points->at(rand() % ile_pkt));///wybieranie losowych punktow jako centroidy
     }
-
-
     for (int powtorzenia = 0; powtorzenia < powt; powtorzenia++) {
         int licznik = 0;
         std::vector<std::vector<double>> srednie_koordynatow;
+        std::vector<int> ilosc_punktow_w_clustrze;
 
         for (it = Centroidy.begin(); it != Centroidy.end(); ++it) {///iteracja przez centroidy
-
-
+            ilosc_punktow_w_clustrze.push_back(0);
             int numer_clustera = licznik;
-
-
             for (p_it = Points->begin(); p_it != Points->end(); ++p_it) {///przydzielanie punktow do clustrow
                 Point iterowany_punkt = *p_it;
                 Point iterowany_centroid = *it;
@@ -63,7 +55,6 @@ void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int 
                 *it = iterowany_centroid;
 
             }
-            
             std::vector<double> srednie_koordynatow_clustra;
             for (int wymiar = 0; wymiar < d; wymiar++) {
                 srednie_koordynatow_clustra.push_back(0.0);
@@ -78,10 +69,10 @@ void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int 
 
         
         
-        
         for (p_it = Points->begin(); p_it != Points->end(); ++p_it) {
             Point podany_punkt = *p_it;
             int numer_clustra = podany_punkt.cluster;
+            ilosc_punktow_w_clustrze[numer_clustra] += 1;///zliczanie ilosci punktow w clustrze
             std::vector<double>::iterator it_coord;///iterator koordyantow podanego punktu
             int numer_wspolrzednej = 0;
             for (it_coord = podany_punkt.coordinates.begin(); it_coord != podany_punkt.coordinates.end(); ++it_coord) {
@@ -101,14 +92,14 @@ void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int 
 
             
             
-            for (int i = 0; i < ilosc_k; i++) {
+            for (int numer_klustra = 0; numer_klustra < ilosc_k; numer_klustra++) {
+                std::cout << "        " << ilosc_punktow_w_clustrze[numer_klustra] << "\n";
                 for (int l = 0; l<d; l++) {
-                    srednie_koordynatow[i][l] = srednie_koordynatow[i][l] /ile_pkt;
-                    std::cout << srednie_koordynatow[i][l] << ", ";
-
-                }
+                    srednie_koordynatow[numer_klustra][l] = srednie_koordynatow[numer_klustra][l]/ilosc_punktow_w_clustrze[numer_klustra];///obliczanie sredniej wspolrzednych
+                    std::cout << srednie_koordynatow[numer_klustra][l] << ", ";                                                           ///dla kazdego klustra->
+                }                                                                                                                           ///wyznaczenie nowych centroidow    
                 std::cout << "\n";
-                Centroidy[i] = Point(srednie_koordynatow[i]);
+                Centroidy[numer_klustra] = Point(srednie_koordynatow[numer_klustra]);                                                                 
              }
         
             for (std::vector<Point>::iterator p_it = Points->begin(); p_it != Points->end(); ++p_it) {
@@ -198,4 +189,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-///.\x64\Debug\proj.exe -i dataset.txt -o liczby.txt -k 3 -d 2 -pkt 15
+///.\x64\Debug\proj.exe -i dataset.txt -o liczby.txt -k 3 -d 2 -pkt 30
