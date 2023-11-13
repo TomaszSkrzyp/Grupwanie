@@ -6,7 +6,7 @@
 #include"C:\Users\Dell\source\repos\Grupwanie\proj\create.h"
 
 /// @brief ta funkcja jest g
-struct Point {///@brief struktura punktu 
+/*struct Point {///@brief struktura punktu 
     std::vector<double> coordinates;
     int cluster;///numer przydzielonego clustera
     double minDist;
@@ -23,7 +23,7 @@ struct Point {///@brief struktura punktu
         }
         return sum;
     }
-
+*/
 
 
 };
