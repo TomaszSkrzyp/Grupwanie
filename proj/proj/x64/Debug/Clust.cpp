@@ -28,7 +28,7 @@ struct Point {///@brief struktura punktu
 
 };
 
-void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int d) {///(adres wektora punktow,ilosc powtorzen algorytmu,ilosc clustrow,ilosc punktow)
+/*void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int d) {///(adres wektora punktow,ilosc powtorzen algorytmu,ilosc clustrow,ilosc punktow)
     std::vector<Point> Centroidy;///wektor przechowujacy centroidy clustrow
     std::vector<Point>::iterator it;
     std::vector<Point>::iterator p_it;
@@ -110,7 +110,7 @@ void k_means(std::vector<Point>* Points, int powt, int ilosc_k, int ile_pkt,int 
         }
 
     }
-
+*/
 
 
 
